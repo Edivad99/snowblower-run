@@ -3,8 +3,6 @@ name: Run Snowblower
 on:
   workflow_call:
     inputs:
-      mc-channel:
-        type: string
       branch:
         type: string
       snowblower-version:
@@ -39,7 +37,7 @@ jobs:
         timeout-minutes: 300
         run: |
           mkdir sb-output
-          java -jar snowblower.jar --output sb-output --branch ${{ inputs.branch }} --committer "snow-lance[bot] 150522644+snow-lance[bot]@users.noreply.github.com" --cache .snowblower/caches --github-app-id 807228 --github-installation-repo Edivad99/minecraft-snowman --push --checkout --remote https://github.com/Edivad99/minecraft-snowman.git --partial-cache --start-over-if-required -Xmx6G
+          java -jar snowblower.jar --output sb-output --branch ${{ inputs.branch }} --cfg https://gist.githubusercontent.com/Edivad99/2247747f44b2d9c35d330a226f867ca1/raw/3d1d04b129737e0921a043ca6907da45aec89ddb/branch-config.json --committer "snow-lance[bot] 150522644+snow-lance[bot]@users.noreply.github.com" --cache .snowblower/caches --github-app-id 807228 --github-installation-repo Edivad99/minecraft-snowman --push --checkout --remote https://github.com/Edivad99/minecraft-snowman.git --partial-cache --start-over-if-required -Xmx6G
         env:
           GITHUB_APP_KEY: ${{ secrets.SNOWLANCE_PRIVATE_KEY }}
 
