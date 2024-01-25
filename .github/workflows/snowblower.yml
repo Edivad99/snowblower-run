@@ -1,0 +1,53 @@
+name: Run Snowblower
+
+on:
+  workflow_call:
+    inputs:
+      mc-channel:
+        type: string
+      branch:
+        type: string
+      snowblower-version:
+        type: string
+    secrets:
+      SNOWLANCE_PRIVATE_KEY:
+        required: true
+
+jobs:
+  run_blower:
+    name: Run SnowBlower
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-java@v3
+        name: Setup Java
+        with:
+          distribution: 'zulu' # See 'Supported distributions' for available options
+          java-version: '17'
+
+      - name: Download SnowBlower
+        run: wget https://maven.neoforged.net/releases/net/neoforged/snowblower/${{ inputs.snowblower-version }}/snowblower-${{ inputs.snowblower-version }}-all.jar -O snowblower.jar
+      
+      - name: Restore caches
+        id: cache-restore
+        uses: actions/cache/restore@v3
+        with:
+          path: |
+            .snowblower/caches
+          key: ${{ runner.os }}-${{ inputs.branch }}-sbcache
+
+      - name: Run snowblower
+        timeout-minutes: 300
+        run: |
+          mkdir sb-output
+          java -jar snowblower.jar --output sb-output --branch ${{ inputs.branch }} --committer "snow-lance[bot] 150522644+snow-lance[bot]@users.noreply.github.com" --cache .snowblower/caches --github-app-id 807228 --github-installation-repo Edivad99/minecraft-snowman --push --checkout --remote https://github.com/Edivad99/minecraft-snowman.git --partial-cache --start-over-if-required -Xmx6G
+        env:
+          GITHUB_APP_KEY: ${{ secrets.SNOWLANCE_PRIVATE_KEY }}
+
+      - name: Save caches
+        id: cache-save
+        uses: actions/cache/save@v3
+        if: always()
+        with:
+          path: |
+            .snowblower/caches
+          key: ${{ steps.cache-restore.outputs.cache-primary-key }}
