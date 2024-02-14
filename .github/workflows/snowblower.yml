@@ -47,7 +47,8 @@ jobs:
           --github-installation-repo Edivad99/minecraft-snowman \
           --push --checkout --remote https://github.com/Edivad99/minecraft-snowman.git \
           --partial-cache \
-          --start-over-if-required
+          --start-over-if-required \
+          --exclude "**.nbt"
 
         env:
           GITHUB_APP_KEY: ${{ secrets.SNOWLANCE_PRIVATE_KEY }}
