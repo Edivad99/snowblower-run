@@ -13,6 +13,6 @@ jobs:
       cancel-in-progress: false
     with:
       branch: dev
-      snowblower-version: 2.0.17
+      snowblower-version: 2.0.18
     secrets:
       SNOWLANCE_PRIVATE_KEY: ${{ secrets.SNOWLANCE_PRIVATE_KEY }}
