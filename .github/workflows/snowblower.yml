@@ -39,7 +39,7 @@ jobs:
           mkdir sb-output
           java -Xmx6G -jar snowblower.jar \
           --output sb-output \
-          --cfg https://gist.githubusercontent.com/Edivad99/2247747f44b2d9c35d330a226f867ca1/raw/3d1d04b129737e0921a043ca6907da45aec89ddb/branch-config.json \
+          --cfg https://raw.githubusercontent.com/Edivad99/snowblower-run/main/branch-config.json \
           --branch ${{ inputs.branch }} \
           --committer "snow-lance[bot] 150522644+snow-lance[bot]@users.noreply.github.com" \
           --cache .snowblower/caches \
