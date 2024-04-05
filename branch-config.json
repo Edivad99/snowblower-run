@@ -1,0 +1,12 @@
+{
+    "branches": {
+      "dev": {
+        "type": "all",
+        "start": "23w51a"
+      },
+      "release": {
+        "type": "release",
+        "start": "1.20.4"
+      }
+    }
+  }
