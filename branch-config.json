@@ -2,11 +2,11 @@
     "branches": {
       "dev": {
         "type": "all",
-        "start": "23w51a"
+        "start": "1.21.1"
       },
       "release": {
         "type": "release",
-        "start": "1.20.4"
+        "start": "1.21.1"
       }
     }
   }
